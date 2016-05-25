@@ -25,6 +25,7 @@ module TOTPTest
       erb :check
     end
 
+    # this definitely isn't sufficient; it doesn't prevent token reuse at all
     post '/validate' do
       check = params['totp']
       ok = settings.totp.verify(check) ? "ok" : "not ok"

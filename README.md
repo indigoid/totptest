@@ -1,4 +1,4 @@
-# Totptest
+# TOTPTest
 
 Minimal example of a Sinatra web service that generates a TOTP QR code and verifies TOTP codes.
 

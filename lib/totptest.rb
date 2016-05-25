@@ -13,14 +13,22 @@ module TOTPTest
       set :png, RQRCode::QRCode.new(qr, :size=>12).to_img.resize(400,400)
     end
 
-    get '/now' do
-      settings.totp.now
+    get '/' do
+      erb :index
     end
 
-    get '/check/:totp' do
+    get '/now' do
+      erb :now
+    end
+
+    get '/check' do
+      erb :check
+    end
+
+    post '/validate' do
       check = params['totp']
       ok = settings.totp.verify(check) ? "ok" : "not ok"
-      "totp code #{check} was #{ok}"
+      erb :validate, :locals => { :check => check, :ok => ok }
     end
 
     get '/qr' do

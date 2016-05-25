@@ -7,8 +7,6 @@ module TOTPTest
   class TOTPTest < Sinatra::Base
     configure do
       set :server, :puma
-      set :bind, settings.bind
-      set :port, settings.port
       totp = ROTP::TOTP.new(ROTP::Base32::random_base32, issuer: "totptest")
       qr = totp.provisioning_uri(ENV['LOGNAME'] || ENV['USER'] || 'anonymous')
       set :totp, totp

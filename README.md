@@ -10,26 +10,12 @@ Minimal example of a Sinatra web service that generates a TOTP QR code and verif
 
     $ totptest
 
-Then connect to it on `localhost:4567`
+Then connect to it and follow the links to try stuff: http://localhost:4567/ 
 
-Retrieve a PNG file containing a QR code:
+Check validity of a TOTP value (123456 in this case) on the commandline:
 
-    $ curl localhost:4567/qr > qr.png 
-
-Get the current TOTP value:
-
-    $ curl localhost:4567/now
-    123456
-
-Check validity of a TOTP value (123456 in this case)
-
-    $ curl localhost:4567/check/123456
-    totp code 123456 was ok
-
-    $ sleep 30
-
-    $ curl localhost:4567/check/123456
-    totp code 123456 was not ok
+    $ curl -sXPOST --data totp=123456 localhost:4567/validate | grep ok
+      <p>TOTP code 123456 was not ok. <a href="/check">Try again</a></p>
 
 ## Contributing
 
